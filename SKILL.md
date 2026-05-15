@@ -1,15 +1,17 @@
 ---
-name: course-lecture description: >- Production of narration-style lectures for online courses, paired with slide decks.
-Supports two formats: non-interactive pre-recorded video (default) and interactive live online lectures (with built-in
-quizzes between blocks). Use this skill whenever the user is creating educational content — writing a narration script
-for a lecture, designing slides to accompany spoken narration, structuring a course module, or planning the iterative
-production of course materials. Triggers include phrases like "лекция", "курс", "модуль курса", "запишем лекцию",
-"скрипт для лекции", "презентация к лекции", "образовательный модуль", "narration script", "course lecture", "lecture
-module", or any request to produce structured spoken text paired with synchronized slides. Make sure to apply this skill
-even when the user doesn't explicitly name it — recognize the intent from context (work on a multi-part course, talk
-about recording a lecture, asking for slides for a course, etc.). The format (interactive vs non-interactive) must be
-confirmed with the user at the start, not assumed. Do NOT use this skill for: generic blog posts, programming tutorials
-whose primary artifact is annotated code, or single-page reference docs.
+name: course-lecture
+description: >-
+  Production of narration-style lectures for online courses, paired with slide decks. Supports two formats:
+  non-interactive pre-recorded video (default) and interactive live online lectures (with built-in quizzes between
+  blocks). Use this skill whenever the user is creating educational content — writing a narration script for a lecture,
+  designing slides to accompany spoken narration, structuring a course module, or planning the iterative production of
+  course materials. Triggers include phrases like "лекция", "курс", "модуль курса", "запишем лекцию", "скрипт для
+  лекции", "презентация к лекции", "образовательный модуль", "narration script", "course lecture", "lecture module", or
+  any request to produce structured spoken text paired with synchronized slides. Make sure to apply this skill even
+  when the user doesn't explicitly name it — recognize the intent from context (work on a multi-part course, talk about
+  recording a lecture, asking for slides for a course, etc.). The format (interactive vs non-interactive) must be
+  confirmed with the user at the start, not assumed. Do NOT use this skill for: generic blog posts, programming
+  tutorials whose primary artifact is annotated code, or single-page reference docs.
 ---
 
 # Course Lecture
@@ -249,7 +251,10 @@ What it does:
 - Leaves untouched: fenced code blocks, headings, horizontal rules, blockquotes, HTML blocks.
 - Collapses 3+ blank lines to one. Ensures exactly one trailing `\n`.
 
-Copy `scripts/lint.py` into the course root (e.g. `devsecops/lint.py`) so the user can run it on their own.
+Canonical-источник линтера — `scripts/lint.py` в этой папке skill. Не дублируй файл в корень каждого курса: дубли будут
+разъезжаться. Если пользователю нужен короткий вызов из корня курса, ставим **символическую ссылку** или используем
+alias / Makefile-цель, ссылающиеся на canonical. Прямой запуск: `python3 ~/.claude/skills/course-lecture/scripts/lint.py
+<part-folder>/*.md`.
 
 ## What this skill is NOT
 
