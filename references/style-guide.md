@@ -1,0 +1,378 @@
+# Style guide for `course-lecture`
+
+Full set of style and convention agreements for a non-interactive video lecture. These accumulate via experience — each
+item exists because skipping it has produced material that doesn't work. Treat as defaults; document any deviation in
+the part's `context.md`.
+
+## Narration text (`03-script.md`)
+
+### Sentence shape
+
+**Use long, natural sentences.** Spoken Russian (or target-language) prose has connective tissue — `и`, `а`, `но`,
+`потому что`, `при этом`. Removing this and producing fragmented 3–4-word punches makes the text unreadable when voiced
+aloud — the speaker has to restitch the rhythm in real time, and most don't manage.
+
+Counter-example (avoid):
+
+> Первое августа 2012 года. 9:30 утра. Нью-Йорк. Knight Capital. Восемь серверов. На семи всё ок. На восьмом — нет.
+
+Preferred:
+
+> 1 августа 2012 года, 9:30 утра в Нью-Йорке. В компании Knight Capital — одном из крупнейших маркет-мейкеров на
+> американских биржах — выкатывают новый код на восьми торговых серверах. На семи он встаёт правильно, на восьмом —
+> нет.
+
+### Numbers
+
+Always digits, never spelled out. The narrator reads digits faster and with less stumbling than written-out numerals.
+
+- Yes: "11.7 секунд", "440 миллионов долларов", "147 миллионов пользователей", "1 августа 2012", "более 10 раз в день"
+- No: "одиннадцать и семь десятых секунды", "первое августа две тысячи двенадцатого года"
+
+### Конкретные метрики и принятые аббревиатуры
+
+Когда говоришь о метрике или эффекте — называй её **конкретно**, с её принятой в индустрии аббревиатурой при первом
+упоминании. Для смешанной/инженерной аудитории это профессиональный язык, а не жаргон: те, кто не знает — узнают
+аббревиатуру; те, кто знает — получат точный сигнал, что речь именно об этом, а не о вообще-чём-то.
+
+**Плохо:** «разработчиков мерят скоростью, эксплуатацию — стабильностью.»
+
+**Хорошо:** «разработчиков мерят Lead Time, частотой релизов и количеством фич, а эксплуатацию — uptime и количеством
+инцидентов.»
+
+Из принятых: **Lead Time** (время от идеи/коммита до прода), **TTM** (Time To Market), **MTTR** (Mean Time To Recovery),
+**MTBF** (Mean Time Between Failures), **uptime**, **change failure rate**, **deploy frequency**. Это не противоречит
+правилу про расшифровку англицизмов: они идут как профессиональные обозначения, а не как метафоры.
+
+### Параллельное перечисление — повторяй subject
+
+Когда перечисляешь три и более параллельных утверждения или отрицания, **не сокращай** subject в каждом пункте: на слух
+сокращение требует от слушателя удерживать subject из прошлого предложения, и к третьему пункту он его теряет.
+
+**Плохо:**
+
+> Не должность: ... Не отдел: ... Не «купить инструмент»: ...
+
+**Хорошо:**
+
+> DevOps это не должность: ... DevOps это не отдел: ... DevOps это не «купить инструмент»: ...
+
+Бонус: каждый такой пункт имеет смысл предварить инлайн-паузой `[P]` — она даёт ритм перечисления, на слух работает как
+«пункт раз... пункт два... пункт три», и помогает удержать структуру через всю последовательность. См. раздел «Lecturer
+hints — minimal».
+
+### Русские конструкции, не кальки
+
+Иностранные термины оставляем; вокруг них — естественный русский, а не дословный перевод.
+
+- `in a loop` → «по кругу», не «в петле»
+- «На Toyota» → «в Toyota» (компания склоняется как существительное женского рода с предлогом «в»)
+- «На Microsoft заявили» → «в Microsoft заявили»
+- «получили вторую жизнь» (как калька с «found a second life») — лучше нейтральное «нашли своё применение» или просто
+  «вернулись в IT»
+
+Критерий проверки: прочти фразу вслух. Если в речи рядового носителя русского языка она звучит «как переведённая с
+английского» — переписывай.
+
+### Метафоры — только когда поясняют
+
+Метафоры в речитативе оправданы, когда они **помогают понять**: образ работает как аналогия, через знакомое объясняется
+незнакомое. Корабль с грузом для разделения delivery / deployment / release — поясняет. Knight Capital как «герой,
+который сейчас погибнет» — поясняет рамку курса.
+
+Метафоры-украшения — когда красивая фраза не несёт пояснительной нагрузки — лучше выкинуть. «Получили вторую жизнь»,
+«дышали в одну сторону», «оседали в умах» — это шум, который лектор сам добавит интонацией, если захочет. В тексте
+украшающие метафоры замедляют и забирают внимание у содержания.
+
+**Критерий:** убери метафору и подставь нейтральную фразу. Стало непонятнее? Метафора нужна. Стало просто суше? Метафора
+была украшением — выкидывай.
+
+### Абстрактный закон → конкретный якорь
+
+Если в речитативе звучит абстрактный закон, принцип или общая формулировка («закон Конвея», «закон Парето», «принцип
+Брукса», «правило 80/20»), **после неё сразу — короткий конкретный пример, который слушатель узнает**. Без якоря
+абстрактная формулировка вылетает из памяти через 30 секунд, и слайд с цитатой висит на стене как «было что-то умное, не
+помню что».
+
+Якорь должен быть:
+
+- **Узнаваем большинству аудитории.** Берём примеры из массового опыта (банковское приложение, интернет-магазин,
+  социальная сеть), а не из узкой профессиональной ниши, если аудитория смешанная.
+- **Конкретен и наблюдаем.** Не «команды как-то выдают свою структуру», а «вход через мобильное приложение и через сайт
+  ведут в разные личные кабинеты с разным набором операций». Конкретный наблюдаемый симптом, а не общая фраза.
+- **Связан с формулировкой явно.** Финал примера должен возвращать к закону: «это не лень и не баг, это закон Конвея в
+  работе: команды разные, и швы продукта совпадают со швами оргструктуры».
+
+**Плохо:**
+
+> Закон Конвея: любая организация, проектирующая систему, выдаёт копию своей коммуникационной структуры. Покажите ваш
+> оргчарт — покажу архитектуру.
+
+(Закон → перефраз → следующая мысль. Слушатель его забудет.)
+
+**Хорошо:**
+
+> Закон Конвея: любая организация, проектирующая систему, выдаёт копию своей коммуникационной структуры. Простой пример:
+> во многих крупных банках вход через мобильное приложение и через сайт ведут в разные личные кабинеты с разным набором
+> операций — это не лень и не баг, это закон Конвея в работе: мобильное приложение делает одна команда, веб — другая, и
+> швы по продукту лежат ровно по границам оргструктуры. Перефразирую короче — покажите ваш оргчарт, и я покажу вам вашу
+> архитектуру.
+
+(Закон → якорь → перефраз. Слушатель помнит и закон, и его проявление.)
+
+### Lecturer hints — minimal
+
+Two markers, used sparingly:
+
+- `### Слайд X.Y — *описание*` — slide change. Description in italics on the same line. Visual details (layout,
+  positioning, accents) live in `02-content-plan.md` and `04-slides-outline.md`, not in the narration.
+- `[P]` — short inline pause for emphasis. Use only at climactic moments (definition, main-thought reveal). One or two
+  per section is plenty.
+- `[P]` is also useful **before each item in a parallel enumeration** of 3+ points (see «Параллельное перечисление —
+  повторяй subject» below). In that role one `[P]` per item is normal and rhythmic, not excessive.
+
+**Don't** write `[темп замедляется]`, `[тон серьёзный]`, `[пауза 2 сек]` etc. The lecturer makes these decisions at
+recording time. Over-instructed scripts produce wooden delivery.
+
+### Pauses
+
+**Empty line between paragraphs = pause.** That's the only pause notation outside `[P]`. Don't write `[Пауза]` on its
+own line — it visually clutters the script and adds nothing the empty line doesn't already convey.
+
+### Ирония-разрядка ставится в сухие места, не в драматические
+
+Тональные разрядки (шутки, ирония, образный коллаж) **усиливают** сухие методологические блоки и **разрушают**
+драматические. Соблюдай это разделение.
+
+- **Сухой блок** — определения, фреймворки, перечисления тезисов, абстрактные принципы. Здесь слушатель устаёт, и ирония
+  оживляет: «обмазаться DevOps-инструментарием: смузи в офисе, барбершоп в холле, Kubernetes в проде» в середине
+  фреймворка People-Process-Technology работает как ритмический сдвиг.
+- **Драматический блок** — кейс-история (Knight Capital, Equifax, конкретный инцидент), катастрофа с цифрами и
+  последствиями, момент кульминации. Здесь ирония разрушает накопленное напряжение и обесценивает поучительность кейса.
+  Не лезь сюда с шутками.
+
+**Двойное назначение разрядки.** Удачная ирония-разрядка работает одновременно в речитативе и на слайде. Слайд
+«обмазаться» левой половиной даёт визуальный гэг (коллаж смузи/барбершоп/Kubernetes), правой — серьёзный список того,
+чего реально не хватает. Слушатель смеётся над левой, потом читает правую — и тезис закрепляется. Такие двойные разрядки
+проектируй на этапе `02-content-plan.md` (черновик слайда) и переноси в `03-script.md` (описание слайда в italics) одним
+блоком.
+
+### Внутренние ярлыки приёмов в финальных артефактах не звучат
+
+В авторских документах (`01-skeleton.md`, `02-content-plan.md`, `context.md`) удобно иметь технические ярлыки для
+повторяющихся приёмов: «Sec-крючок №N», «Knight-привязка», «callback», «hook», «main thought». Это нужно для навигации и
+обсуждения между автором и редактором — «глянь, второй sec-крючок звучит сухо», «третья Knight-привязка слишком
+длинная».
+
+**Эти ярлыки — только внутренние.** В речитативе, на слайдах и в любых артефактах, которые видит/слышит аудитория, ярлык
+не должен появляться. Аудитория не должна знать, что у тебя есть приём под названием «Sec-крючок» — это сразу выдаёт
+структурную фишку и обесценивает её.
+
+**На слайдах:** вместо универсального шаблонного заголовка («🔒 Sec-крючок №N») ставь **тематический заголовок**,
+отражающий именно содержание этой плашки. Это и фактическая нагрузка, и не выдаёт повторяющийся приём.
+
+**В речитативе:** не объявляй приём («сквозная линия», «возвращающийся мотив», «структурный callback»). Если хочется
+дать слушателю опору, что мы вернёмся — используй функциональную фразу («к этому вернёмся в конце», «об этом дальше»), а
+не имя приёма.
+
+Этот принцип распространяется на любую авторскую механику: tutorial-boss-арку, Knight-привязки, sec-крючки, callbacks к
+открытию, главные мысли. В авторских документах называем как удобно, в финальных — пропускаем имя.
+
+### Forward references — без подвешенных образов
+
+Различай два типа forward reference: один допустим, другой ломает поток понимания.
+
+**Допустимо: нейтральный анонс темы.** Если ты ссылаешься на следующую секцию через слова, которые слушатель понимает
+**прямо сейчас**, — это просто анонс, без когнитивной нагрузки. «Третья часть процесса, о которой поговорим в следующей
+секции», «второй уровень DevOps-трансформации, о нём дальше», «к этому вернёмся в конце» — все эти формулировки несут
+структуру («есть процесс, у него три части»; «есть несколько уровней»), и слушатель спокойно её держит.
+
+**Не допустимо: подвешенный образ или метафора.** Если ты ссылаешься на ещё не введённый образ — «третья нога стула, о
+котором поговорим в следующей секции» — слушатель в моменте слышит «нога — стул — что за стул?» и застревает на
+непонятной картинке. Пока ты идёшь к раскрытию, он либо теряет нить, либо тратит внимание на догадки вместо текущей
+мысли.
+
+**Плохо:**
+
+> Это технология, третья нога стула, о котором поговорим в следующей секции.
+
+(«Третья нога стула» — метафора, которая ещё не введена. Слушатель ловит «нога — стул — что?» и до конца секции не
+возвращается к содержанию.)
+
+**Хорошо (нейтральный анонс темы):**
+
+> Это технология, третья часть процесса, о которой поговорим в следующей секции.
+
+(«Третья часть процесса» — нейтральная структурная ссылка. Слушатель понимает: есть процесс, у него три части, дальше
+расскажут.)
+
+**Хорошо (анонс с раскрытием прямо сейчас):**
+
+> Это технология. Сами по себе технологии без работы над людьми и процессами дают ускоренный хаос — об этих трёх
+> уровнях следующая секция.
+
+(Тема анонсирована, и три уровня расшифровываются прямо здесь.)
+
+**Критерий.** Если убрать слова «о котором поговорим в следующей секции», предыдущая часть фразы должна оставаться
+понятной слушателю. «Третья часть процесса» — да, понятно. «Третья нога стула» — нет, без введённого стула не понятно.
+
+Это правило симметрично применяется и к фактам/кейсам: не упоминай «случай Knight Capital» / «инцидент Equifax» / любую
+конкретику до того, как она представлена. Если кейс введён в открытии — на него можно ссылаться; если нет — сначала
+коротко объясни.
+
+### Visual emphasis (markdown)
+
+- **Bold** for words to emphasize vocally. One or two per paragraph, not whole sentences. Bolding everything is the same
+  as bolding nothing.
+- *Italic* for foreign-language terms on first appearance (`*throw it over the wall*`, `*flow*`, `*small batches*`).
+  Don't keep italicizing on every recurrence — the audience hears the script, the typography is for the lecturer.
+- `Code` for keyboard names, file names, commands.
+
+### Section convention
+
+Each substantial section (`## Секция N — Название`) has the same internal arc:
+
+1. Slide change to the opening slide of the section.
+2. Setup of the problem / narrative.
+3. Mandatory thesis content.
+4. (Optional) Sec-hook — short forward reference to security if the course has a Sec arc.
+5. (Optional) Narrative-frame callback (one sentence) — see `context.md` "Нарративная рамка".
+6. **Main thought** on its own slide — the section's takeaway, one short formulation. This is the memorable beat.
+7. (Optional) Discharge — story / meme / quote — as a bridge to the next section.
+
+## Markdown style (all files)
+
+### Russian typography
+
+- **«Ёлочки»** for quotes; `"лапки"` only inside ёлочек or in English text.
+- **Long em-dash** —. Not hyphen `-`, not en-dash `–`.
+- **Letter ё** always — when the word has it. Don't replace with `е`.
+
+### Stop-words
+
+Avoid in vague claims: `является`, `имеется`, `считается`. They show up in formulations like "считается, что …" — and
+those formulations always need a source the writer didn't bother to find.
+
+In precise statements (`X не является Y` where X is unambiguously not Y) they're fine.
+
+### English-term gloss on first appearance per file
+
+The first time a foreign term appears in a file, gloss it in parentheses in Russian:
+
+- `pipeline (конвейер сборки и доставки)`
+- `SAST (Static Application Security Testing — статический анализ исходного кода на уязвимости)`
+- `feature flag (флаг функциональности — переключатель в коде, которым фича включается без передеплоя)`
+
+Subsequent uses go without gloss. Tracking "first appearance" per file (not per project) — each file's audience may read
+it standalone.
+
+## Fact-check discipline
+
+`02-content-plan.md` is the source-of-truth file for facts. For every concrete date, number, name, quote, or causal
+claim:
+
+- Cite a source (book, paper, talk, official report).
+- If unsure of the formulation — tag `⚠️ FACT-CHECK` and write what specifically is uncertain.
+
+Before recording — dedicated fact-check pass: every `⚠️ FACT-CHECK` marker is verified against a primary source. No
+recording until that pass is complete.
+
+When forced to simplify (lecture format → fewer details), make the simplification **explicit** in `02-content-plan.md`
+("simplification: omits the role of FX hedging in the Knight crisis — not material to the DevOps point"). Hidden
+simplifications corrode trust.
+
+**Городские легенды и atmospheric details — выкидываем или помечаем источник.** Соблазнительные детали вроде «на сессию
+никто не пришёл», «в зале сидели только трое», «инженер сделал это в 3 часа ночи» часто идут из устной молвы и не имеют
+первичного источника. Если их оставить — повторно цитируемая байка превращается в «факт». Правила:
+
+- Если деталь не подтверждена первичным источником — выкидывай или заменяй на сухой факт без эмоциональной окраски.
+- Если хочется оставить — помечай явно: «по воспоминаниям участников», «по легенде, ходящей в индустрии», и в
+  `02-content-plan.md` ставь `⚠️ FACT-CHECK` с пометкой «atmospheric detail, проверить источник».
+
+Это не значит, что atmospheric details запрещены — это значит, что они должны быть либо проверены, либо честно помечены
+как недоказанные.
+
+## Hronometraj rule
+
+Default target: 30 minutes; acceptable range 28–35. At 140 wpm that's 3900–4900 words.
+
+In stage 3, **don't force sections into pre-allocated time slots from the skeleton.** If a section's content needs +30
+seconds, give it; if it's thin, compress. Final timing is the sum of what came out dense, not a sketched grid filled in.
+
+## Style for `02-content-plan.md`
+
+- Each section gets: ключевая мысль / обязательные тезисы / источники с `⚠️ FACT-CHECK` / аналогии / анти-тезисы /
+  черновик слайдов.
+- Анти-тезисы — explicit list of "what NOT to say" — saves a lot of redrafts. Patterns to flag:
+    - phrases that turn into "advice from the pulpit" ("вы должны…", "правильно делать так…");
+    - hidden assumptions about the audience ("все знают, что…");
+    - factually-fuzzy formulations ("80% компаний", "большинство экспертов считают").
+
+## Style for `04-slides-outline.md`
+
+- One slide per `### Слайд X.Y` heading.
+- Specify: layout (1 column / 2 columns / centered / etc.), title, body, visuals (image, diagram, code), accents (which
+  words are bold/colored), notes for the slide designer.
+- Main-thought slides have a distinct treatment — dark background, large text, no decorations.
+
+## Style for `final/*.pptx`
+
+- Title slide / outline slide / closing slide — three structural slides.
+- Per-section slides match the count specified in `04-slides-outline.md`.
+- Main-thought slides as designed — visual punctuation that the audience remembers.
+
+## Inheritance rules across parts
+
+When starting a new part of the same module, copy `context.md` from the previous part. Inherit as-is:
+
+- Audience, tone, format
+- Language and terminology conventions
+- Hronometraj
+- Style for narration and Markdown
+- Fact-check discipline
+- File structure and process
+- Linter
+
+Rewrite per part:
+
+- Section structure (content of this specific part)
+- Place in the overall course (what came before, what's next)
+- Narrative frame (if part-specific)
+- Learning outcomes (`ОР`)
+- ОР → section → main thought mapping
+
+## Инструменты-символы и устаревание примеров
+
+Когда антипаттерн или тезис привязан к **классу** проблем («покупка инструмента вместо процесса», «доверие к одной
+метрике», «миграция в облако как трансформация»), его символ-носитель тоже должен быть **классом**, а не одним
+именованным инструментом. Привязка к конкретному инструменту даёт антипаттерну срок годности, равный сроку жизни этого
+инструмента в индустрии.
+
+**Плохо:** «купить Jenkins без работы над процессами» (Jenkins в 2026 года уже на излёте — антипаттерн устаревает вместе
+с ним).
+
+**Хорошо:** «обмазаться DevOps-инструментарием: смузи, барбершоп, Kubernetes, Copilot Enterprise» (символ — класс
+закупок, а не один продукт; список конкретных образов обновляется под текущий год).
+
+### Когда конкретное имя инструмента всё-таки уместно
+
+- **В перечислениях как иллюстрация.** «Kubernetes, GitLab, Prometheus — это технологии» — здесь имена работают
+  собирательно, и замена одного не меняет смысла.
+- **В кейс-историях.** «GitLab в 2017 году потерял продакшен-базу из-за ручного бекапа» — конкретика факта, а не
+  антипаттерн-маркер.
+- **Когда инструмент сам и есть тема секции.** В лекции про Nginx — Nginx как центральный объект, не как символ
+  антипаттерна.
+
+### Сверка примеров на актуальность
+
+Перед записью лекции пройдись по примерам инструментов и спроси по каждому:
+
+- Жив ли инструмент в текущей индустрии (не потерял ли relevance за последние 2–3 года)?
+- Узнаваем ли он целевой аудиторией? Если за время между написанием и записью лекции случился сдвиг (мёртвый инструмент,
+  ребрендинг, поглощение) — заменяй.
+- Не дублируется ли инструмент в разных ролях (один раз как пример технологии, второй раз как символ антипаттерна)? Если
+  да — символ антипаттерна меняй на другой, менее узнаваемый в положительной роли.
+
+Помечай примеры, чувствительные к времени, отдельной строкой в `02-content-plan.md`: «обновить под текущий год — список
+DevOps-инструментов, к которым прицепился антипаттерн закупки». Это не FACT-CHECK (тот про источники), это
+TIME-SENSITIVE — отдельная категория правок при перезаписи лекции.
