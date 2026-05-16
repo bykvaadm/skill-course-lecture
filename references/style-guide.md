@@ -298,6 +298,46 @@ The first time a foreign term appears in a file, gloss it in parentheses in Russ
 Subsequent uses go without gloss. Tracking "first appearance" per file (not per project) — each file's audience may read
 it standalone.
 
+### Известное ограничение `lint.py`: blockquote внутри bullet list
+
+`scripts/lint.py` корректно сохраняет блок-цитаты (`> ...`) **только** на верхнем уровне документа. Блок-цитата **внутри
+bullet list** (с отступом, как «продолжение» пункта) линтер не распознаёт как blockquote и склеивает в одну строку с
+предыдущим текстом — получается мусор вида `**Контент:** одна строка крупно: > **DevOps** — это...`.
+
+**Антипример (ломается линтером):**
+
+```markdown
+- **Контент:** одна строка крупно, белым на тёмном:
+  > **DevOps** — это набор практик, культурных установок и инструментов.
+```
+
+После `python3 lint.py` строки 1–2 склеятся, и `>` превратится в обычный текст внутри bullet'а.
+
+**Как обходить.** В файлах stage-плана (`02-content-plan.md`) и outline слайдов (`04-slides-outline.md`) цитаты внутри
+буллитов **не оформляй** через `> ...`. Используй один из:
+
+- **Кавычки-«ёлочки» с bold внутри буллита.**
+
+  ```markdown
+  - **Контент:** одна строка крупно, белым на тёмном — «**DevOps** — это набор практик, культурных установок и
+    инструментов».
+  ```
+
+- **Вынеси цитату из буллита** в отдельный самостоятельный blockquote после буллит-списка (тогда linter её сохранит):
+
+  ```markdown
+  - **Тип:** Main thought
+  - **Контент:** одна строка крупно, белым на тёмном.
+
+  > **DevOps** — это набор практик, культурных установок и инструментов.
+  ```
+
+Самостоятельные blockquote (не вложенные в bullet) — `> ...` на уровне 0 — linter обрабатывает корректно. Это
+ограничение касается только вложенных случаев.
+
+> TODO для skill-репо: дополнить `lint.py` распознаванием blockquote-continuation внутри bullet'ов. Пока ограничение
+> описано тут и обходится в авторских файлах.
+
 ## Fact-check discipline
 
 `02-content-plan.md` is the source-of-truth file for facts. For every concrete date, number, name, quote, or causal
