@@ -81,6 +81,9 @@ The user will say something like "let's write part N of module X" or "make a lec
    user to provide the full course structure before doing anything else.** Don't proceed without it: a lecture written
    in isolation usually misplaces hooks (anchors a "Sec-hook" to the next submodule when it should anchor to a section
    four modules later, or pretends to be the audience's first encounter with the topic when it's actually the third).
+   Также: цель раздела/модуля ≠ ОР отдельной части — модуль может обещать больше, чем покрывает одна лекция. Не ссылайся
+   на соседние части, не убедившись, что они есть в карте (не анонсируй «об этом в следующей части», если такой части
+   нет).
 2. **Locate the part folder.** Convention: `<course-root>/<NN-section>/<NN-part-name>/`, e.g.
    `devsecops/02-introduction-basics/01-devops/`.
 3. **Read `context.md` if it exists.** Confirm the agreements before drafting anything. If something's missing, propose
